@@ -1,0 +1,29 @@
+version: "3"
+
+volumes:
+  quiz_pg_db:
+
+services:
+  database:
+    image: postgres:12-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    volumes:
+      - quiz_pg_db:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: docker
+      POSTGRES_PASSWORD: docker
+      POSTGRES_DB: exampledb
+
+  app:
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    container_name: db-app
+    depends_on:
+      - database
+    volumes:
+      - ./app:/app
+    ports:
+      - 5000:5000
