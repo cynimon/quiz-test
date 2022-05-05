@@ -14,7 +14,15 @@ services:
     environment:
       POSTGRES_USER: docker
       POSTGRES_PASSWORD: docker
-      POSTGRES_DB: exampledb
+      POSTGRES_DB: quiz_db
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - database
+    ports:
+      - 8080:8080
 
   app:
     build:
