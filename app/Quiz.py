@@ -8,7 +8,7 @@ from sqlalchemy.sql.functions import max
 from sqlalchemy.orm import sessionmaker
 from typing import Any
 
-db_config = "postgresql://docker:docker@localhost:5432/quiz_db"
+db_config = "postgresql://docker:docker@database/quiz_db"
 db = create_engine(db_config)
 Base = declarative_base()
 

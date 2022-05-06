@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:5000/
+POST http://127.0.0.1:5000/
 Content-Type: application/json
 
 {
