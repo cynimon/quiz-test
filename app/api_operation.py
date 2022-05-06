@@ -30,5 +30,14 @@ def add_quizz_to_db(data: dict, amount: int) -> bool:
         return True
 
 
-def handle_data(req_id: int) -> dict:
-
+# выдаёт сохраненные вопросы из предыдущего POST запроса к API
+# если запроса не было - то возвращается пустой объект
+def handle_data(req_id: int) -> list:
+    data_list = QuizModel.get_questions(req_id - 1)
+    datas_dict = []
+    if len(data_list) == 0:
+        return {}
+    else:
+        for rw in data_list:
+            datas_dict.append(QuizModel.to_json(rw))
+        return datas_dict
