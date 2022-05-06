@@ -16,14 +16,6 @@ services:
     volumes:
       - quiz_pg_db:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer
-    restart: always
-    depends_on:
-      - database
-    ports:
-      - 8080:8080
-
   app:
     build:
       context: ./app
