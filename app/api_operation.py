@@ -11,6 +11,10 @@ def get_quizz_data(amount: int, req_id: int) -> bool:
         quiz_data['quiz_text'].append(d['question'])
         quiz_data['quiz_answer'].append(d['answer'])
         quiz_data['created'].append(d['created_at'])
+    if amount == 0:
+        quiz_data = {'quiz_id': [None], 'quiz_text': [None],
+                     'quiz_answer': [None], 'created': [None], 'request_id': req_id}
+        amount = 1
     return add_quizz_to_db(quiz_data, amount)
 
 
@@ -32,10 +36,11 @@ def add_quizz_to_db(data: dict, amount: int) -> bool:
 
 # выдаёт сохраненные вопросы из предыдущего POST запроса к API
 # если запроса не было - то возвращается пустой объект
+# если пред. запрос был с 0 вопросов - то возвращается пустой объект
 def handle_data(req_id: int) -> list:
     data_list = QuizModel.get_questions(req_id - 1)
     datas_dict = []
-    if len(data_list) == 0:
+    if len(data_list) == 0 or data_list[0][0] is None:
         return {}
     else:
         for rw in data_list:

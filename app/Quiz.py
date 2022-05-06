@@ -1,15 +1,15 @@
 from sqlalchemy import create_engine
-from sqlalchemy.sql.expression import select
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.sql.schema import Column
-from sqlalchemy.sql.sqltypes import Integer, String, BigInteger, DateTime
-from sqlalchemy.exc import IntegrityError
 from sqlalchemy.sql.functions import max
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.sql.expression import select
+from sqlalchemy.sql.sqltypes import Integer, String, BigInteger, DateTime
 from typing import Any
 
-db_config = "postgresql://docker:docker@database/quiz_db"
-db = create_engine(db_config)
+DATABASE_URL = "postgresql://docker:docker@database/quiz_db"
+db = create_engine(DATABASE_URL)
 Base = declarative_base()
 
 Session = sessionmaker(db)

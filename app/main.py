@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 @app.route('/', methods=["POST"])
-def index() -> dict:
+def hello() -> dict:
     if request.is_json:
         req_id = QuizModel.max_request()
         amount = request.get_json()
